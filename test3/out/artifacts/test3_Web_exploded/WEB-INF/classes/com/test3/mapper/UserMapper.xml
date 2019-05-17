@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test3.mapper.UserMapper">
+
+    <select id="check" resultType="com.test3.pojo.user">
+        select * from user
+    </select>
+
+    <select id="checkOne" resultType="com.test3.pojo.user" parameterType="com.test3.pojo.user">
+        select * from user where id=#{id}
+    </select>
+
+    <insert id="addUser" parameterType="com.test3.pojo.user">
+        insert into user(id,username,password,sex) value (#{id},#{username},#{password},#{sex})
+    </insert>
+
+    <delete id="deleteUser" parameterType="com.test3.pojo.user">
+        delete from user where id=#{id}
+    </delete>
+
+    <update id="updateOne" parameterType="com.test3.pojo.user">
+        update user set username=#{username},password=#{password},sex=#{sex} where id=#{id}
+    </update>
+
+    <select id="paging" parameterType="com.test3.pojo.Paging" resultType="com.test3.pojo.user">
+        <bind name="firstItem" value="(pageNumber-1)*pageSize"></bind>
+        select * from user
+          <where>
+              <if test="queryCondition!=null">
+                  username like CONCAT('%',#{queryCondition},'%')
+              </if>
+          </where>
+        limit #{firstItem},#{pageSize}
+    </select>
+
+    <select id="count" resultType="int" parameterType="com.test3.pojo.Paging">
+        select COUNT(id) from user
+          <where>
+              <if test="queryCondition!=null">
+                  username like CONCAT('%',#{queryCondition},'%')
+              </if>
+          </where>
+    </select>
+</mapper>
+
+
