@@ -19,7 +19,7 @@
                 <li>id：<input type="text" name="id" id="id"></li>
                 <li>用户名：<input type="text" name="username" id="username"></li>
                 <li>密码：<input type="password" name="password" id="password"></li>
-                <li>sex性别：<input type="text" name="sex" id="sex"></li>
+                <li>sex性别性别：<input type="text" name="sex" id="sex"></li>
                 <%--<input type="submit" value="添加">--%>
             </ul>
         </form>
